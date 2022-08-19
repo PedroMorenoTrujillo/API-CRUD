@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeroService } from './services/heroService';
 import { ObservableHeroService } from './services/observableHeroService';
 import { TabledataModule } from './components/tabledata/tabledata.module';
+import { ModalModule } from './components/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TabledataModule } from './components/tabledata/tabledata.module';
     FormsModule,
     ReactiveFormsModule,
     TabledataModule,
+    ModalModule,
   ],
   providers: [
     HeroService,

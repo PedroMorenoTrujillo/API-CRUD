@@ -1,0 +1,22 @@
+mat-form-field {
+  margin-right: 2rem;
+}
+
+.mat-dialog-actions{
+  justify-content: end;
+  button{
+    margin-right: .5rem;
+  }
+}
+
+.closeButton{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-header-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

@@ -14,7 +14,10 @@ export class AppComponent implements OnInit {
   constructor(private heroService: HeroService, private observableHeroService: ObservableHeroService){}
 
   ngOnInit(): void {
-    this.heroService.getHeroesFromJson().subscribe(heroData => this.observableHeroService.changeHeroList(heroData))
+    this.heroService.getHeroesFromJson().subscribe(heroData => {
+      heroData.forEach((hero: Hero)=> hero.id = (hero.nameLabel + hero.citizenshipLabel).trim());
+      this.observableHeroService.changeHeroList(heroData);
+    })
   }
 
 }

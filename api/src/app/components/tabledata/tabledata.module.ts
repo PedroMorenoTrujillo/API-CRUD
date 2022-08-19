@@ -1,3 +1,4 @@
+import { ModalModule } from './../modal/modal.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabledataComponent } from './tabledata.component';
@@ -7,7 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [TabledataComponent],
   exports: [TabledataComponent],
@@ -19,6 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatPaginatorModule,
     MatSortModule,
     MatChipsModule,
+    ModalModule,
+    MatButtonModule,
   ],
 })
 export class TabledataModule {}

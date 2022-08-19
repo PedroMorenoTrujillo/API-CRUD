@@ -1,0 +1,34 @@
+<div class="modalContainer">
+  <div class="modal-header-row">
+    <h1>{{ hero ? "Hero" : "Create your Hero" }}</h1>
+    <button class="closeButton" (click)="closeModal()">X</button>
+  </div>
+
+  <form [formGroup]="heroForm" (submit)="createHero()">
+    <ng-container *ngFor="let key of displayedKeys; let i = index">
+      <mat-form-field appearance="legacy">
+        <mat-label>{{ displayedLabels[i] }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ displayedLabels[i] }}"
+          formControlName="{{ key }}"
+        />
+      </mat-form-field>
+    </ng-container>
+
+    <div mat-dialog-actions>
+      <button
+        type="submit"
+        mat-stroked-button
+        *ngIf="!hero"
+        [disabled]="heroForm.invalid"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-stroked-button (click)="editHero()" *ngIf="hero">Edit</button>
+    <button mat-stroked-button (click)="deleteHero()" *ngIf="hero">Delete</button>
+  </div>
+</div>

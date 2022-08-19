@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {MatDialog} from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-tabledata',
@@ -24,7 +26,7 @@ export class TabledataComponent implements OnInit {
   addOnBlur = true;
   tableDataFiltered!: MatTableDataSource<any>;
 
-  constructor(private observableHeroService: ObservableHeroService) {}
+  constructor(private observableHeroService: ObservableHeroService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.observableHeroService.heroList.subscribe((heroList) => {
@@ -73,6 +75,12 @@ export class TabledataComponent implements OnInit {
   }
 
   selectHero(hero: Hero){
-    console.log(hero)
+    this.dialog.open(ModalComponent, {
+      data:hero
+    })
+  }
+
+  createHero(){
+    this.dialog.open(ModalComponent, {data: null})
   }
 }

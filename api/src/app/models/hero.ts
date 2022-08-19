@@ -6,5 +6,5 @@ export interface Hero {
   occupationLabel: string;
   memberOfLabel: string;
   creatorLabel: string;
-  id?: number
+  id?: string
 }
