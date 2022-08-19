@@ -1,3 +1,19 @@
-table {
-  width: 100%;
+.tableContainer {
+  width: 90%;
+  margin: 0 auto;
+  height: 30rem;
+  overflow: auto;
+  table {
+    width: 100%;
+  }
+  .mat-paginator-sticky {
+    bottom: 0;
+    position: sticky;
+    z-index: 10;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
 }
