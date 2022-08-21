@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HighchartsChartModule } from 'highcharts-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,10 +11,9 @@ import { ObservableHeroService } from './services/observableHeroService';
 import { TabledataModule } from './components/tabledata/tabledata.module';
 import { ModalModule } from './components/modal/modal.module';
 
+
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,11 +23,9 @@ import { ModalModule } from './components/modal/modal.module';
     ReactiveFormsModule,
     TabledataModule,
     ModalModule,
+    HighchartsChartModule,
   ],
-  providers: [
-    HeroService,
-    ObservableHeroService,
-  ],
-  bootstrap: [AppComponent]
+  providers: [HeroService, ObservableHeroService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

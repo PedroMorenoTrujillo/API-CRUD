@@ -9,11 +9,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { BarchartModule } from '../charts/barchart/barchart.module';
+import { PiechartModule } from '../charts/piechart/piechart.module';
 @NgModule({
   declarations: [TabledataComponent],
   exports: [TabledataComponent],
   imports: [
     CommonModule,
+    BarchartModule,
+    PiechartModule,
     MatIconModule,
     MatInputModule,
     MatTableModule,

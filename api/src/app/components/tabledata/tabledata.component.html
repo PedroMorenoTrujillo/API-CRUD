@@ -1,34 +1,49 @@
 <div class="tableContainer" *ngIf="tableData">
+  <button mat-stroked-button (click)="createHero()">Create Hero</button>
+  <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Select Hero</mat-label>
+    <mat-chip-list #chipList aria-label="Hero Selection">
+      <mat-chip
+        *ngFor="let filter of selectedFilters"
+        (removed)="remove(filter)"
+      >
+        {{ filter }}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input
+        placeholder="New Hero..."
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="addOnBlur"
+        (matChipInputTokenEnd)="add($event)"
+      />
+    </mat-chip-list>
+  </mat-form-field>
 
-    <button mat-stroked-button (click)="createHero()">Basic</button>
-    <mat-form-field class="example-chip-list" appearance="fill">
-      <mat-label>Select Hero</mat-label>
-      <mat-chip-list #chipList aria-label="Hero Selection">
-        <mat-chip *ngFor="let filter of selectedFilters" (removed)="remove(filter)">
-          {{filter}}
-          <button matChipRemove>
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip>
-        <input placeholder="New Hero..."
-               [matChipInputFor]="chipList"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="addOnBlur"
-               (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
-    </mat-form-field>
-  
-
-
-
-  <table mat-table matSort [dataSource]="tableDataFiltered" class="mat-elevation-z8">
+  <table
+    mat-table
+    matSort
+    [dataSource]="tableDataFiltered"
+    class="mat-elevation-z8 material-table"
+  >
     <ng-container>
       <ng-container
         *ngFor="let element of displayedHeader; let i = index"
         [matColumnDef]="displayedColumns[i]"
       >
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          {{ displayedHeader[i] }}
+          <div class="headerContainer">
+            <span class="headerRow">{{ displayedHeader[i] }}</span>
+            <div class="chartContainer">
+              <app-piechart
+              [chartId]="'piechart' + i"
+              *ngIf="tableDataFiltered.data.length <= 5"
+            ></app-piechart>
+            <app-barchart [chartId]="'barchart' + i"  *ngIf="tableDataFiltered.data.length > 5"></app-barchart>
+            </div>
+          </div>
         </th>
         <td mat-cell *matCellDef="let element">
           {{ element[displayedColumns[i]] | titlecase }}
@@ -37,15 +52,18 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row (click)="selectHero(row)" *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="selectHero(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
   </table>
   <mat-paginator
     class="mat-paginator-sticky"
     [length]="tableDataFiltered.data.length"
-    [pageSize]="5"
+    [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 100]"
     aria-label="Select page"
   >
   </mat-paginator>
 </div>
-
