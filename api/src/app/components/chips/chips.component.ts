@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ObservableHeroService } from 'src/app/services/observableHeroService';
 
 @Component({
   selector: 'app-chips',
@@ -13,9 +14,16 @@ export class ChipsComponent implements OnInit {
   selectedFilters: string[] = [];
   addOnBlur = true;
 
-  constructor() {}
+  constructor(private observableHeroService: ObservableHeroService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.observableHeroService.refreshFilter.subscribe((refresh: Boolean)=>{
+      if(refresh){
+        this.selectedFilters = [];
+        this.observableHeroService.refreshApp(false)
+      }
+    })
+  }
 
   add(event: MatChipInputEvent): void {
     if (event.value.trim() !== '') {

@@ -22,7 +22,7 @@ export class TabledataComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   selectedFilters: string[] = [];
   tableDataFiltered!: MatTableDataSource<any>;
-  secondRowData: any= {}
+  secondRowData: any = {};
 
   constructor(
     private observableHeroService: ObservableHeroService,
@@ -31,17 +31,13 @@ export class TabledataComponent implements OnInit {
 
   ngOnInit(): void {
     this.observableHeroService.heroList.subscribe((heroList) => {
-      if(heroList.length > 0){
-        this.tableData = heroList;
-        this.tableDataFiltered = new MatTableDataSource<Hero>(heroList);
-          this.secondRowData = formatDataForCharts(heroList)
-        this.tableDataFiltered.paginator = this.paginator;
-        this.tableDataFiltered.sort = this.sort;
-      }
-
+      this.tableDataFiltered = new MatTableDataSource<Hero>(heroList);
+      this.tableDataFiltered.paginator = this.paginator;
+      this.tableDataFiltered.sort = this.sort;
+      this.tableData = heroList;
+      this.secondRowData = formatDataForCharts(heroList);
     });
   }
-
 
   changeFilters(selectedFilersEmmited: string[]) {
     this.selectedFilters = selectedFilersEmmited;
@@ -78,4 +74,5 @@ export class TabledataComponent implements OnInit {
   createHero() {
     this.dialog.open(ModalComponent, { data: null });
   }
+
 }

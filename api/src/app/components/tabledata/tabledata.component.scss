@@ -1,6 +1,6 @@
-.buttonContainer{
+.buttonContainer {
   width: 90%;
-  margin: 5rem auto 2rem;
+  margin: 1rem auto 2rem;
 }
 .tableContainer {
   width: 90%;
@@ -9,7 +9,7 @@
   overflow: auto;
   table.material-table {
     width: 100%;
-    .headerContainer{
+    .headerContainer {
       display: block;
       .headerRow {
         display: block;
@@ -21,9 +21,17 @@
       .chartContainer {
         padding: 0.5rem 0;
         margin-top: 2rem;
+        .secondRowFirstColumn {
+          height: 150px;
+          .heroNumber {
+            font-size: 22px;
+            color: darkblue;
+            font-weight: 700;
+            padding-top: 3rem;
+          }
+        }
       }
     }
-
   }
   .mat-paginator-sticky {
     bottom: 0;

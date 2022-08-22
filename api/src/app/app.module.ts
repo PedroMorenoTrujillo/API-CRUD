@@ -10,6 +10,7 @@ import { HeroService } from './services/heroService';
 import { ObservableHeroService } from './services/observableHeroService';
 import { TabledataModule } from './components/tabledata/tabledata.module';
 import { ModalModule } from './components/modal/modal.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ModalModule } from './components/modal/modal.module';
     TabledataModule,
     ModalModule,
     HighchartsChartModule,
+    MatButtonModule,
   ],
   providers: [HeroService, ObservableHeroService],
   bootstrap: [AppComponent],

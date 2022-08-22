@@ -28,7 +28,7 @@
     </div>
   </form>
   <div mat-dialog-actions>
-    <button mat-stroked-button (click)="editHero()" *ngIf="hero">Edit</button>
-    <button mat-stroked-button (click)="deleteHero()" *ngIf="hero">Delete</button>
+    <button mat-stroked-button color="primary"(click)="editHero()" *ngIf="hero">Edit</button>
+    <button mat-stroked-button color="warn" (click)="deleteHero()" *ngIf="hero">Delete</button>
   </div>
 </div>

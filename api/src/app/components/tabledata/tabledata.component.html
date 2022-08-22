@@ -17,24 +17,27 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <div class="headerContainer">
             <span class="headerRow">{{ displayedHeader[i] }}</span>
-            <div class="chartContainer">
+            <div class="chartContainer" *ngIf="tableDataFiltered.data.length > 0">
               <ng-container *ngIf="i === 0">
-                <div>{{secondRowData[displayedColumns[i]]}}</div>
-                <div>Unique values</div>
+                <div class="secondRowFirstColumn">
+                  <div class="heroNumber">
+                    {{ secondRowData[displayedColumns[i]] }}
+                  </div>
+                  <div>Unique values</div>
+                </div>
               </ng-container>
               <ng-container *ngIf="i > 0">
                 <app-piechart
-                [chartId]="'piechart' + i"
-                [data]="secondRowData[displayedColumns[i]]"
-                *ngIf="tableDataFiltered.data.length <= 5"
-              ></app-piechart>
-              <app-barchart
-                [chartId]="'barchart' + i"
-                [data]="secondRowData[displayedColumns[i]]"
-                *ngIf="tableDataFiltered.data.length > 5"
-              ></app-barchart>
+                  [chartId]="'piechart' + i"
+                  [data]="secondRowData[displayedColumns[i]]"
+                  *ngIf="tableDataFiltered.data.length <= 5"
+                ></app-piechart>
+                <app-barchart
+                  [chartId]="'barchart' + i"
+                  [data]="secondRowData[displayedColumns[i]]"
+                  *ngIf="tableDataFiltered.data.length > 5"
+                ></app-barchart>
               </ng-container>
-
             </div>
           </div>
         </th>
