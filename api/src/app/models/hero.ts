@@ -1,10 +1,10 @@
 export interface Hero {
   nameLabel: string;
-  genderLabel: string;
+  [genderLabel: string]: string;
   citizenshipLabel: string;
   skillsLabel: string;
   occupationLabel: string;
   memberOfLabel: string;
   creatorLabel: string;
-  id?: string
+  id: string
 }

@@ -6,11 +6,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { BarchartModule } from '../charts/barchart/barchart.module';
 import { PiechartModule } from '../charts/piechart/piechart.module';
+import { ChipsModule } from '../chips/chips.module';
 @NgModule({
   declarations: [TabledataComponent],
   exports: [TabledataComponent],
@@ -18,14 +17,13 @@ import { PiechartModule } from '../charts/piechart/piechart.module';
     CommonModule,
     BarchartModule,
     PiechartModule,
-    MatIconModule,
-    MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatChipsModule,
     ModalModule,
     MatButtonModule,
+    ChipsModule,
   ],
 })
 export class TabledataModule {}

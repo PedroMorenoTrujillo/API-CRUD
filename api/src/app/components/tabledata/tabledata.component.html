@@ -1,27 +1,8 @@
-<div class="tableContainer" *ngIf="tableData">
+<div class="buttonContainer">
   <button mat-stroked-button (click)="createHero()">Create Hero</button>
-  <mat-form-field class="example-chip-list" appearance="fill">
-    <mat-label>Select Hero</mat-label>
-    <mat-chip-list #chipList aria-label="Hero Selection">
-      <mat-chip
-        *ngFor="let filter of selectedFilters"
-        (removed)="remove(filter)"
-      >
-        {{ filter }}
-        <button matChipRemove>
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip>
-      <input
-        placeholder="New Hero..."
-        [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="addOnBlur"
-        (matChipInputTokenEnd)="add($event)"
-      />
-    </mat-chip-list>
-  </mat-form-field>
-
+</div>
+<app-chips (selectedFiltersForEmit)="changeFilters($event)"></app-chips>
+<div class="tableContainer" *ngIf="tableDataFiltered">
   <table
     mat-table
     matSort
@@ -37,11 +18,23 @@
           <div class="headerContainer">
             <span class="headerRow">{{ displayedHeader[i] }}</span>
             <div class="chartContainer">
-              <app-piechart
-              [chartId]="'piechart' + i"
-              *ngIf="tableDataFiltered.data.length <= 5"
-            ></app-piechart>
-            <app-barchart [chartId]="'barchart' + i"  *ngIf="tableDataFiltered.data.length > 5"></app-barchart>
+              <ng-container *ngIf="i === 0">
+                <div>{{secondRowData[displayedColumns[i]]}}</div>
+                <div>Unique values</div>
+              </ng-container>
+              <ng-container *ngIf="i > 0">
+                <app-piechart
+                [chartId]="'piechart' + i"
+                [data]="secondRowData[displayedColumns[i]]"
+                *ngIf="tableDataFiltered.data.length <= 5"
+              ></app-piechart>
+              <app-barchart
+                [chartId]="'barchart' + i"
+                [data]="secondRowData[displayedColumns[i]]"
+                *ngIf="tableDataFiltered.data.length > 5"
+              ></app-barchart>
+              </ng-container>
+
             </div>
           </div>
         </th>
