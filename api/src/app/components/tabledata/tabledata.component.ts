@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Hero } from 'src/app/models';
 import { TableDataHeader } from 'src/app/models/tableDataHeader';
 import { ObservableHeroService } from 'src/app/services/observableHeroService';
@@ -8,13 +8,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 import { formatDataForCharts } from './tools';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tabledata',
   templateUrl: './tabledata.component.html',
   styleUrls: ['./tabledata.component.scss'],
 })
-export class TabledataComponent implements OnInit {
+export class TabledataComponent implements OnInit, OnDestroy {
   tableData: Hero[] = [];
   displayedHeader: string[] = Object.values(TableDataHeader);
   displayedColumns: string[] = Object.keys(TableDataHeader);
@@ -23,14 +24,16 @@ export class TabledataComponent implements OnInit {
   selectedFilters: string[] = [];
   tableDataFiltered!: MatTableDataSource<any>;
   secondRowData: any = {};
+  unsubcribe: Subject<void> = new Subject();
 
   constructor(
     private observableHeroService: ObservableHeroService,
     private dialog: MatDialog
   ) {}
 
+
   ngOnInit(): void {
-    this.observableHeroService.heroList.subscribe((heroList) => {
+    this.observableHeroService.heroList.pipe(takeUntil(this.unsubcribe)).subscribe((heroList) => {
       this.tableDataFiltered = new MatTableDataSource<Hero>(heroList);
       this.tableDataFiltered.paginator = this.paginator;
       this.tableDataFiltered.sort = this.sort;
@@ -75,4 +78,7 @@ export class TabledataComponent implements OnInit {
     this.dialog.open(ModalComponent, { data: null });
   }
 
+  ngOnDestroy(): void {
+    this.unsubcribe.unsubscribe();
+  }
 }
